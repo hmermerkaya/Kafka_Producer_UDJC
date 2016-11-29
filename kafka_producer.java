@@ -57,11 +57,11 @@ if (first) {
 	cnt_succeded=0;
 	first = false;
 if (getParameter("SECURITY").equals("on") ){
-  String  jaasConfigFile =getParameter("JAASCONFIGFILE");
-  System.setProperty("java.security.auth.login.config", jaasConfigFile);
-  System.setProperty("java.security.krb5.conf", "/etc/krb5.conf");
- System.setProperty("javax.security.auth.useSubjectCredsOnly", "false");
-  System.setProperty("sun.security.krb5.debug", "true");
+  	  String  jaasConfigFile =getParameter("JAASCONFIGFILE");
+	  System.setProperty("java.security.auth.login.config", jaasConfigFile);
+	  System.setProperty("java.security.krb5.conf", "/etc/krb5.conf");
+	  System.setProperty("javax.security.auth.useSubjectCredsOnly", "false");
+	  System.setProperty("sun.security.krb5.debug", "true");
 } else if (getParameter("SECURITY").equals("off") || getParameter("SECURITY")==null  ){
 
 }else {
@@ -81,17 +81,17 @@ throw new SecuritySetException("<<<<<<<<<<PLEASE SET THE SECURITY IN THE PARAMET
     //logBasic(infofields[1]);
  	Properties  prop = new Properties();
     
-    for (int i=0;i < infofields.length; i++){
+    	for (int i=0;i < infofields.length; i++){
 	String value = get(Fields.Info,infofields[i]).getString(infoRow);
 	 //logBasic(infofields[i]+" = "+value);
 	if (value==null  || value.equals("(default)")) continue;
    //  logBasic(infofields[i]+" = "+value);
  // prop.put(infofields[i],value);
-     if (getParameter("SECURITY").equals("off") || getParameter("SECURITY")==null){
-     	if (infofields[i].contains("security") || infofields[i].contains("sasl")) continue; 
-     	else prop.put(infofields[i],value);
-    } else prop.put(infofields[i],value);
-}
+   	  if (getParameter("SECURITY").equals("off") || getParameter("SECURITY")==null){
+        	if (infofields[i].contains("security") || infofields[i].contains("sasl")) continue; 
+     		else prop.put(infofields[i],value);
+   	 } else prop.put(infofields[i],value);
+      }
 	producer = new KafkaProducer(prop);
  
  
