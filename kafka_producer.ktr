@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>kafka_producer</name>
+    <name>kafka_producer_with_sec</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -76,11 +76,15 @@
   <notepads>
   </notepads>
   <order>
-  <hop> <from>Concat Fields</from><to>kafka_producer</to><enabled>Y</enabled> </hop>
-  <hop> <from>Text file input 2</from><to>Concat Fields</to><enabled>Y</enabled> </hop>
+  <hop> <from>input</from><to>ConcatFields</to><enabled>Y</enabled> </hop>
+  <hop> <from>ConcatFields</from><to>kafka_producer</to><enabled>Y</enabled> </hop>
+  <hop> <from>Props</from><to>kafka_producer</to><enabled>Y</enabled> </hop>
+  <hop> <from>kafka_producer</from><to>file1</to><enabled>Y</enabled> </hop>
+  <hop> <from>kafka_producer</from><to>file2</to><enabled>Y</enabled> </hop>
+  <hop> <from>kafka_producer</from><to>log</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Concat Fields</name>
+    <name>ConcatFields</name>
     <type>ConcatFields</type>
     <description/>
     <distribute>Y</distribute>
@@ -250,14 +254,247 @@
     </ConcatFields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>360</xloc>
-      <yloc>80</yloc>
+      <xloc>354</xloc>
+      <yloc>78</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Text file input 2</name>
+    <name>Props</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>bootstrap.servers</name>
+        <variable>kafka1.hamitmermerkaya.com&#x3a;9092</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>key.serializer</name>
+        <variable>org.apache.kafka.common.serialization.StringSerializer</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>linger.ms</name>
+        <variable/>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>value.serializer</name>
+        <variable>org.apache.kafka.common.serialization.StringSerializer</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>security.protocol</name>
+        <variable>SASL_PLAINTEXT</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>sasl.kerberos.service.name</name>
+        <variable>kafka</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>sasl.mechanism</name>
+        <variable>GSSAPI</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>449</xloc>
+      <yloc>272</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>file1</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <separator>&#x3b;</separator>
+    <enclosure>&#x22;</enclosure>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>Y</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>&#x2f;media&#x2f;kafka&#x2f;Pentaho-Kafka&#x2f;Kafka_Producers_Trans&#x2f;file1</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>Failed</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Succeded</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>836</xloc>
+      <yloc>184</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>file2</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <separator>&#x3b;</separator>
+    <enclosure>&#x22;</enclosure>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>Y</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>&#x2f;media&#x2f;kafka&#x2f;Pentaho-Kafka&#x2f;Kafka_Producers_Trans&#x2f;file2</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>853</xloc>
+      <yloc>49</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>input</name>
     <type>TextFileInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -294,6 +531,16 @@
     <encoding/>
     <add_to_result_filenames>Y</add_to_result_filenames>
     <file>
+      <name>&#x2f;home&#x2f;kafka&#x2f;Desktop&#x2f;HGW12016110711511800310657_reduced.csv</name>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+      <name/>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
       <name>&#x2f;home&#x2f;hmermerk&#x2f;Documents&#x2f;pentaho_test&#x2f;sample&#x2f;HGW12016110711511800310657.csv</name>
       <filemask/>
       <exclude_filemask/>
@@ -1108,7 +1355,7 @@
     <name>kafka_producer</name>
     <type>UserDefinedJavaClass</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
@@ -1150,57 +1397,76 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.Producer;
+import kafka.common.FailedToSendMessageException;
+import  org.apache.kafka.common.config.ConfigException;
 //import org.apache.kafka.common.serialization.StringSerializer;
-/*
-public class kafka_producer{
 
-  public static  Producer producer;
-  public static RowMetaInterface inputRowMeta;
-   public static TransMeta metadata;
-   public static  Trans trans;
+class SecuritySetException extends Exception {
+   public SecuritySetException(String msg){
+      super(msg);
+   }
 }
-*/
+
 Producer producer;
 RowMetaInterface inputRowMeta;
+Integer cnt_failed;
+Integer cnt_succeded;
+RowSet outputStream_1;
+RowSet outputStream_2;
+RowSet outputStream_3;
 
-public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws KettleException
+Object[] r1=null;
+Object[] r2=null;
+public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws KettleException, SecuritySetException
 {
 
-Object[] r = getRow();
-		if (r == null) {
-			setOutputDone();
-			return false;
-		}
+ 
 
 if (first) {
+	cnt_failed=0;
+	cnt_succeded=0;
 	first = false;
-    String  jaasConfigFile =getParameter("JAASCONFIGFILE");
- System.setProperty("java.security.auth.login.config", jaasConfigFile);
- System.setProperty("java.security.krb5.conf", "/etc/krb5.conf");
-  System.setProperty("javax.security.auth.useSubjectCredsOnly", "false");
-      System.setProperty("sun.security.krb5.debug", "true");
+if (getParameter("SECURITY").equals("on") ){
+  String  jaasConfigFile =getParameter("JAASCONFIGFILE");
+  System.setProperty("java.security.auth.login.config", jaasConfigFile);
+  System.setProperty("java.security.krb5.conf", "/etc/krb5.conf");
+ System.setProperty("javax.security.auth.useSubjectCredsOnly", "false");
+  System.setProperty("sun.security.krb5.debug", "true");
+} else if (getParameter("SECURITY").equals("off") || getParameter("SECURITY")==null  ){
+
+}else {
+ 
+throw new SecuritySetException("<<<<<<<<<<PLEASE SET THE SECURITY IN THE PARAMETERS!!! on/off>>>>>>>>>>>>>>>>>");
+
+}
+	// outputRow_2 = null;
+	outputStream_1 = findOutputRowSet("file1");
+	outputStream_2 = findOutputRowSet("file2");
+    outputStream_3 = findOutputRowSet("log");
+	RowSet infoStream = findInfoRowSet("Props");
+
+	Object[] infoRow = null;
+	infoRow= getRowFrom(infoStream);
+	String[]infofields =infoStream.getRowMeta().getFieldNames(); 
+    //logBasic(infofields[1]);
+ 	Properties  prop = new Properties();
+    
+    for (int i=0;i < infofields.length; i++){
+	String value = get(Fields.Info,infofields[i]).getString(infoRow);
+	 //logBasic(infofields[i]+" = "+value);
+	if (value==null  || value.equals("(default)")) continue;
+   //  logBasic(infofields[i]+" = "+value);
+ // prop.put(infofields[i],value);
+     if (getParameter("SECURITY").equals("off") || getParameter("SECURITY")==null){
+     	if (infofields[i].contains("security") || infofields[i].contains("sasl")) continue; 
+     	else prop.put(infofields[i],value);
+    } else prop.put(infofields[i],value);
+}
+	producer = new KafkaProducer(prop);
+ 
+ 
 
 /*
-Properties  props = new Properties();
-  Properties substProperties = new Properties();
-  props.put("bootstrap.servers","hamits:9092");
-  props.put("acks", "all");
-      
-      //If the request fails, the producer can automatically retry,
-  //    props.put("retries", 0);
-      
-      //Specify buffer size in config
-  props.put("batch.size", 16384);
-      
-      //Reduce the no of requests less than 0   
-  props.put("linger.ms", 1);
-      
-      //The buffer.memory controls the total amount of memory available to the producer for buffering.   
-  props.put("buffer.memory", 33554432);
-  props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
- props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");  
- */
-
   Properties props = new Properties();
   InputStream input = null;
 
@@ -1211,7 +1477,7 @@ Properties  props = new Properties();
 		props.load(input);
 
 		producer = new KafkaProducer(props);
-     
+       
 	} catch (IOException ex) {
 		ex.printStackTrace();
 	} finally {
@@ -1224,53 +1490,72 @@ Properties  props = new Properties();
 		}
 	}
 
+*/
 
     
-/*      Iterator iter = props.entrySet().iterator() ;
-while(iter.hasNext()) {
-            Entry e = (Entry)iter.next(); 
- logBasic("e.getValue() " + e.getKey()+" "+e.getValue());
-//  System.out.println(e.getValue());
-    //   substProperties.put(e.getKey(), environmentSubstitute(e.getValue().toString()));
-}
-*/
 
 
 } //EndIF 
 
+r1 = getRow();
+	if (r1 == null) {
+		//outputRow_2=createOutputRow(outputRow_2, data.outputRowMeta.size());
+
+
+		putRowTo(data.outputRowMeta,r2,outputStream_1);
+        putRowTo(data.outputRowMeta,r2,outputStream_3);
+		setOutputDone();
+		return false;
+	} 
+
+
+
+
 inputRowMeta=getInputRowMeta().clone();
 String []fields=inputRowMeta.getFieldNames();
-//List fiields=inputRowMeta.getFieldNames();
-//Object[] outputRow = createOutputRow(r, data.outputRowMeta.size());
-
 
 
 String message="";
-logBasic("hello begin");
+//logBasic("hello begin");
 for (int i = 0; i < fields.length; i++){
     String field_tmp=getParameter("MESSAGE_FIELD_NAME");
     if (field_tmp .equals(fields[i]) ) {
 	// logBasic("Field " +fields[i]);
 	//if (fields[i] != null && fields[i].length() > 0 ) continue; 
-	String tmp = get(Fields.In,fields[i]).getString(r);
-	logBasic("tmp " +tmp);
+	String tmp = get(Fields.In,fields[i]).getString(r1);
+	//logBasic("tmp " +tmp);
 	message=message+tmp;
 	}
 }
-logBasic("hello end");
+///logBasic("hello end");
 //message=message.substring(0,message.length()-2);
-logBasic("message "+message);
+//logBasic("message "+message);
 
 
 
 
-//for(int i = 0; i < 100; i++)
-//kafka_producer.producer.send(new ProducerRecord("igwcdrCSV",Integer.toString(i),Integer.toString(i)));
-//kafka_producer.producer.close();
+
 String topic=getParameter("TOPIC_NAME");
 
 ProducerRecord  producerRecord = new ProducerRecord (topic, message, message);
-producer.send(producerRecord);
+try{
+	producer.send(producerRecord);
+	cnt_succeded++;
+}catch (FailedToSendMessageException  e){
+	e.printStackTrace();
+	cnt_failed++;
+}
+//Object[] outputRow = createOutputRow(r, data.outputRowMeta.size());
+r2 = r1;
+r2=createOutputRow(r2, data.outputRowMeta.size());
+get(Fields.Out,"Succeded").setValue(r2,Integer.toString(cnt_succeded) );
+get(Fields.Out,"Failed").setValue(r2, Integer.toString(cnt_failed));
+
+
+putRowTo(data.outputRowMeta,r2,outputStream_2);
+//putRowTo(data.outputRowMeta,r2,outputStream_3);
+// putRow(data.outputRowMeta, r2);
+//logBasic("message "+ cnt_succeded);	
 return true;
 }
 
@@ -1278,35 +1563,251 @@ return true;
 
 public void stopRunning(StepMetaInterface smi, StepDataInterface sdi) throws KettleException {
 
-		
+
+
 	if ( producer != null) {
 			producer.close();
 			producer = null;
 	}
 	super.stopRunning(smi, sdi);
 }
-]]></class_source>
+public void dispose(StepMetaInterface smi, StepDataInterface sdi) throws KettleException {
+
+//outputRow_2=createOutputRow(r, data.outputRowMeta.size());
+//putRowTo(data.outputRowMeta,outputRow_2,outputStream);
+
+//get(Fields.Out,"Succeded").setValue(outputRow,Integer.toString(cnt_succeded) );
+//get(Fields.Out,"Failed").setValue(outputRow, Integer.toString(cnt_failed));
+
+//logBasic("message "+ cnt_succeded);		
+	if ( producer != null) {
+			producer.close();
+			producer = null;
+	}
+	super.dispose(smi, sdi);
+}]]></class_source>
         </definition>
     </definitions>
     <fields>
+        <field>
+        <field_name>Failed</field_name>
+
+        <field_type>String</field_type>
+
+        <field_length>-1</field_length>
+
+        <field_precision>-1</field_precision>
+
+        </field>
+        <field>
+        <field_name>Succeded</field_name>
+
+        <field_type>String</field_type>
+
+        <field_length>-1</field_length>
+
+        <field_precision>-1</field_precision>
+
+        </field>
     </fields><clear_result_fields>N</clear_result_fields>
-<info_steps></info_steps><target_steps></target_steps><usage_parameters><usage_parameter><parameter_tag>PROPS_FILE</parameter_tag>
-<parameter_value>&#x2f;home&#x2f;kafka-test&#x2f;producer.properties</parameter_value>
-<parameter_description/>
-</usage_parameter><usage_parameter><parameter_tag>MESSAGE_FIELD_NAME</parameter_tag>
+<info_steps><info_step><step_tag>Props</step_tag>
+<step_name>Props</step_name>
+<step_description/>
+</info_step></info_steps><target_steps><target_step><step_tag>file1</step_tag>
+<step_name>file1</step_name>
+<step_description/>
+</target_step><target_step><step_tag>file2</step_tag>
+<step_name>file2</step_name>
+<step_description/>
+</target_step><target_step><step_tag>log</step_tag>
+<step_name>log</step_name>
+<step_description/>
+</target_step></target_steps><usage_parameters><usage_parameter><parameter_tag>MESSAGE_FIELD_NAME</parameter_tag>
 <parameter_value>csvStr</parameter_value>
 <parameter_description/>
 </usage_parameter><usage_parameter><parameter_tag>TOPIC_NAME</parameter_tag>
-<parameter_value>test7</parameter_value>
+<parameter_value>test4</parameter_value>
 <parameter_description/>
 </usage_parameter><usage_parameter><parameter_tag>JAASCONFIGFILE</parameter_tag>
 <parameter_value>&#x2f;etc&#x2f;kafka&#x2f;kafka_client_kerberos_jaas.conf</parameter_value>
 <parameter_description/>
+</usage_parameter><usage_parameter><parameter_tag>SECURITY</parameter_tag>
+<parameter_value>on</parameter_value>
+<parameter_description/>
 </usage_parameter></usage_parameters>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>603</xloc>
-      <yloc>152</yloc>
+      <xloc>635</xloc>
+      <yloc>61</yloc>
       <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>log</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+      <limitRows>N</limitRows>
+      <limitRowsNumber>0</limitRowsNumber>
+      <logmessage/>
+    <fields>
+      <field>
+        <name>csvStr</name>
+        </field>
+      <field>
+        <name>Failed</name>
+        </field>
+      <field>
+        <name>Succeded</name>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>687</xloc>
+      <yloc>267</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>reference</name>
+    <type>DataGrid</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>batch.size</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>bootstrap.servers</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>key.serializer</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>linger.ms</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>metadata.broker.list</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>producer.type</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>sasl.kerberos.service</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>sasl.mechanism</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>security.protocol</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>value.serializer</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <data>
+      <line> <item>test</item><item>&#x2f;etc&#x2f;kafka&#x2f;kafka_client_kerberos.conf</item><item>kafka1.hamitmermerkaya.com&#x3a;9091</item><item>kafka1.hamitmermerkaya.com&#x3a;9091</item><item>1</item><item>16834</item><item>sync</item><item>org.apache.kafka.common.serialization.StringSerializer</item><item>org.apache.kafka.common.serialization.StringSerializer</item><item/> </line>
+    </data>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>277</xloc>
+      <yloc>205</yloc>
+      <draw>N</draw>
       </GUI>
     </step>
 
