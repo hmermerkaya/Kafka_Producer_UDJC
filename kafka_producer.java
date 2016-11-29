@@ -203,8 +203,6 @@ public void stopRunning(StepMetaInterface smi, StepDataInterface sdi) throws Ket
 }
 public void dispose(StepMetaInterface smi, StepDataInterface sdi) throws KettleException {
 
-
-
 	if ( producer != null) {
 			producer.close();
 			producer = null;
