@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>kafkaproducer</name>
+    <name>kafka_producer</name>
     <description/>
     <extended_description/>
     <trans_version/>
