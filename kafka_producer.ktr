@@ -274,7 +274,7 @@
     <fields>
       <field>
         <name>bootstrap.servers</name>
-        <variable>kafka1.hamitmermerkaya.com&#x3a;9092</variable>
+        <variable>kafka1.myhostname.com&#x3a;9092</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -390,7 +390,7 @@
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>&#x2f;media&#x2f;kafka&#x2f;Pentaho-Kafka&#x2f;Kafka_Producers_Trans&#x2f;file1</name>
+      <name>&#x2f;home&#x2f;kafka-client&#x2f;file1</name>
       <is_command>N</is_command>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
@@ -466,7 +466,7 @@
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>&#x2f;media&#x2f;kafka&#x2f;Pentaho-Kafka&#x2f;Kafka_Producers_Trans&#x2f;file2</name>
+      <name>&#x2f;home&#x2f;kafka-client&#x2f;file2</name>
       <is_command>N</is_command>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
@@ -531,17 +531,7 @@
     <encoding/>
     <add_to_result_filenames>Y</add_to_result_filenames>
     <file>
-      <name>&#x2f;home&#x2f;kafka&#x2f;Desktop&#x2f;HGW12016110711511800310657_reduced.csv</name>
-      <filemask/>
-      <exclude_filemask/>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-      <name/>
-      <filemask/>
-      <exclude_filemask/>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-      <name>&#x2f;home&#x2f;hmermerk&#x2f;Documents&#x2f;pentaho_test&#x2f;sample&#x2f;HGW12016110711511800310657.csv</name>
+      <name>&#x2f;home&#x2f;kafka-client&#x2f;HGW12016110711511800310657.csv</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
@@ -1626,7 +1616,7 @@ public void dispose(StepMetaInterface smi, StepDataInterface sdi) throws KettleE
 <parameter_value>csvStr</parameter_value>
 <parameter_description/>
 </usage_parameter><usage_parameter><parameter_tag>TOPIC_NAME</parameter_tag>
-<parameter_value>test4</parameter_value>
+<parameter_value>test8</parameter_value>
 <parameter_description/>
 </usage_parameter><usage_parameter><parameter_tag>JAASCONFIGFILE</parameter_tag>
 <parameter_value>&#x2f;etc&#x2f;kafka&#x2f;kafka_client_kerberos_jaas.conf</parameter_value>
