@@ -46,7 +46,6 @@ RowSet outputStream_3;
 
 Object[] r1=null;
 Object[] r2=null;
-
 public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws KettleException, SecuritySetException
 {
 
@@ -70,9 +69,10 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
 
 		}
 		// outputRow_2 = null;
-		outputStream_1 = findOutputRowSet("file1");
-		outputStream_2 = findOutputRowSet("file2");
+		outputStream_1 = findOutputRowSet("summary");
+		outputStream_2 = findOutputRowSet("full_output");
 		outputStream_3 = findOutputRowSet("log");
+
 		RowSet infoStream = findInfoRowSet("Props");
 
 		Object[] infoRow = null;
@@ -129,7 +129,6 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
 
 	r1 = getRow();
 	if (r1 == null) {
-		//outputRow_2=createOutputRow(outputRow_2, data.outputRowMeta.size());
 
 
 		putRowTo(data.outputRowMeta,r2,outputStream_1);
@@ -158,7 +157,6 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
 		}
 	}
 	///logBasic("hello end");
-	//message=message.substring(0,message.length()-2);
 	//logBasic("message "+message);
 
 
@@ -175,7 +173,7 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
 		e.printStackTrace();
 		cnt_failed++;
 	}
-	//Object[] outputRow = createOutputRow(r, data.outputRowMeta.size());
+
 	r2 = r1;
 	r2=createOutputRow(r2, data.outputRowMeta.size());
 	get(Fields.Out,"Succeded").setValue(r2,Integer.toString(cnt_succeded) );
@@ -185,7 +183,6 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
 	putRowTo(data.outputRowMeta,r2,outputStream_2);
 	//putRowTo(data.outputRowMeta,r2,outputStream_3);
 	// putRow(data.outputRowMeta, r2);
-
 	return true;
 }
 
