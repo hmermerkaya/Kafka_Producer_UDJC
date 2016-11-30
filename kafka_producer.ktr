@@ -274,7 +274,7 @@
     <fields>
       <field>
         <name>bootstrap.servers</name>
-        <variable>kafka1.myhostname.com&#x3a;9092</variable>
+        <variable>kafka1.myhostname.com&#x3a;9092,kafka2.myhostname.com&#x3a;9092</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -1344,7 +1344,7 @@ if (getParameter("SECURITY").equals("on") ){
   String  jaasConfigFile =getParameter("JAASCONFIGFILE");
   System.setProperty("java.security.auth.login.config", jaasConfigFile);
   System.setProperty("java.security.krb5.conf", "/etc/krb5.conf");
- System.setProperty("javax.security.auth.useSubjectCredsOnly", "false");
+  System.setProperty("javax.security.auth.useSubjectCredsOnly", "false");
   System.setProperty("sun.security.krb5.debug", "true");
 } else if (getParameter("SECURITY").equals("off") || getParameter("SECURITY")==null  ){
 
